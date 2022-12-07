@@ -14,6 +14,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn import tree
 from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.neighbors import KNeighborsClassifier
 
 df = pd.read_csv("humanDetails.csv", encoding="ISO-8859-1")
 pd.set_option('display.max_rows', df.shape[0] + 1)
@@ -59,10 +60,9 @@ def Task1():
     X = flt[[' workclass', 'age', 'native-country']]  # features
     y = flt[['Income']]  # target variables
 
-    # print(flt[[' workclass']])
-
     # # cross validation
     kfold = StratifiedShuffleSplit(n_splits=5, test_size=0.2)
+
     trI = []
     tsI = []
     # decision tree classifier
@@ -90,6 +90,7 @@ def Task1():
 
 
 Task1()
+
 # def Task2():
 #     flt = df[['hours-per-week', 'occupation ', 'age', 'relationship',
 #               'Income']].copy()
@@ -119,17 +120,83 @@ Task1()
 #     flt.loc[flt['Income'].str.contains('>50K', na=False), 'Income'] = 2
 #     flt['Income'] = flt['Income'].apply(pd.to_numeric, errors='coerce')
 #
+#     # convert 'occupation ' to numeric
+#     allOccupations = np.unique(flt['occupation '].astype(str))
+#     dict2 = {}
+#     c = 1
+#     for ac in allOccupations:
+#         dict2[ac] = c
+#         c = c + 1
+#     flt['occupation '] = flt['occupation '].map(dict2)
+#
+#     # convert 'relationship' to numeric
+#     allClasses = np.unique(flt['relationship'].astype(str))
+#     dict3 = {}
+#     c2 = 1
+#     for ac in allClasses:
+#         dict3[ac] = c2
+#         c2 = c2 + 1
+#     flt['relationship'] = flt['relationship'].map(dict3)
+#     flt = flt.dropna()
+#
+#     X = flt[['occupation ', 'age', 'relationship', 'hours-per-week']]  # features
+#     y = flt[['Income']]  # target variables
+#
 #     # cross validation
 #     kfold = StratifiedShuffleSplit(n_splits=5, test_size=0.2)
 #
+#     trI = []
+#     tsI = []
+#     # decision tree classifier
+#     tree_clf = tree.DecisionTreeClassifier()
+#     tree_clf.fit(X, y)
+#     default = tree_clf.get_depth()
+#     tree_tr = []
+#     tree_ts = []
+#     for i in range(2, default - 1):
+#         tree_clf = tree.DecisionTreeClassifier(max_depth=i + 1)
+#         for train, test in kfold.split(X, y):
+#             tree_clf.fit(X.iloc[train], y.iloc[train])
+#             trI.append(tree_clf.score(X.iloc[train], y.iloc[train]))
+#             tsI.append(tree_clf.score(X.iloc[test], y.iloc[test]))
+#         print(i + 1)
+#         tree_tr.append(np.mean(trI))
+#         tree_ts.append(np.mean(tsI))
+#         print("----------")
+#     plt.plot(tree_ts)
+#     plt.plot(tree_tr)
+#     print(tree_clf.score(X, y))
+#     plt.show()
 #
-#
+#     # K Nearest Neighbour
+#     knn = KNeighborsClassifier()
+#     knn_tr = []
+#     knn_ts = []
+#     for i in range(1, 5):
+#         knn = KNeighborsClassifier(n_neighbors=i)
+#         for train, test in kfold.split(X, y):
+#             knn.fit(X.iloc[train], y.iloc[train].values.ravel())
+#             trI.append(knn.score(X.iloc[train], y.iloc[train]))
+#             tsI.append(knn.score(X.iloc[test], y.iloc[test]))
+#         print(i + 1)
+#         knn_tr.append(np.mean(trI))
+#         knn_ts.append(np.mean(tsI))
+#         print('------------')
+#     plt.plot(knn_tr)
+#     plt.plot(knn_ts)
+#     print(knn.score(X, y))
+#     plt.show()
+
+
 # Task2()
+
 # def Task3():
 #     flt = df[['fnlwgt', 'education-num', 'age', 'hours-per-week']].copy()
 #
 #     # remove values with 's'
 #     flt['age'] = flt['age'].str.replace(r's', '')
 #     flt['age'] = flt['age'].apply(pd.to_numeric, errors='coerce')
-
+#
+#
+#
 # Task3()
