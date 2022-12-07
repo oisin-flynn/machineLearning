@@ -98,9 +98,9 @@ Task1()
 #     flt['occupation '] = flt['occupation '].replace(' ?', np.nan)
 #     flt['occupation '] = flt['occupation '].fillna(flt['occupation '].mode()[0])
 #
-# # remove values with 's'
-# flt['age'] = flt['age'].str.replace(r's', '')
-# flt['age'] = flt['age'].apply(pd.to_numeric, errors='coerce')
+#     # remove values with 's'
+#     flt['age'] = flt['age'].str.replace(r's', '')
+#     flt['age'] = flt['age'].apply(pd.to_numeric, errors='coerce')
 #
 #     # remove 'Other-relative'
 #     flt['relationship'] = flt['relationship'].replace(' Other-relative', np.nan)
@@ -131,5 +131,5 @@ Task1()
 #     # remove values with 's'
 #     flt['age'] = flt['age'].str.replace(r's', '')
 #     flt['age'] = flt['age'].apply(pd.to_numeric, errors='coerce')
-#
+
 # Task3()
