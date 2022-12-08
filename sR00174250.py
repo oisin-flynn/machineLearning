@@ -58,6 +58,7 @@ def Task1():
     flt[' workclass'] = flt[' workclass'].map(dict3)
     flt = flt.dropna()
 
+    # TODO Run decision tree classifier for each country
     X = flt[[' workclass', 'age', 'native-country']]  # features
     y = flt[['Income']]  # target variables
 
@@ -89,7 +90,6 @@ def Task1():
     print(tree_clf.score(X, y))
     plt.show()
 
-    # plot
     # tree.plot_tree(tree_clf, filled=True, label='all')
     # plt.savefig('tree.png', dpi=300)
 
